@@ -1,0 +1,44 @@
+<%= javascript_include_tag :ckeditor %>
+<%= stylesheet_link_tag "fck_editor.css" %>
+<table width="70%" align="center">
+        <tr>
+                <td width="20%" style="background:yellow; font-family:arial; font-size:15px; color:green">
+                        <b>Send Email</b>
+                </td>
+                <td style="color:red">
+                       <%= flash[:notice] %>
+                </td>
+        </tr>
+</table>
+<% form_tag :action => 'sendmail' ,:html=> {:multipart => :true} do  %>
+       <table width="70%" align="center" style="background: none repeat scroll 0 0 rgba(82, 82, 82, 0.7);
+                        box-shadow: 3px 3px 3px 3px #AAAAAA;border: 5px solid #3B1000;">
+                <tr>
+                         <td>
+                                <label for="email_subject">Subject</label>:
+                                &nbsp; <%= text_field 'email', 'subject'%>
+                         </td>
+                 </tr>
+                <tr>
+                        <td>
+                                <label for="email_recipient">Recipient</label>:
+                                <%= text_field 'email', 'recipient'%>
+                        </td>
+                 </tr>
+                 <tr>
+                        <td>
+                                <label for="email_message">Message</label>:
+                                <%#= text_area 'email', 'message', :size=>"50x3"%>
+                                <%= ckeditor_textarea("email", "message", :width => '99%', :height => '180px') %>
+                        </td>
+                   </tr>
+           <table>
+        <table align="center">
+                <tr>
+                        <td>
+                                <%= submit_tag "Send" %>
+                        </td>
+                </tr>
+        </table>
+<%end %>
+
